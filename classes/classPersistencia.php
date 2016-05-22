@@ -1,4 +1,7 @@
 <?php
+
+	error_reporting (E_ALL & ~ E_NOTICE & ~ E_DEPRECATED);
+
 	date_default_timezone_set("America/Sao_Paulo");
 	class Persistencia  {
 
