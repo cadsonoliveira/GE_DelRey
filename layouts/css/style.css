@@ -374,14 +374,14 @@ input.tamanho{
 
 #topo {
 	background:url(../img/background_menu.jpg) no-repeat;
-	height:100px;
+	height:75px;
 	border-bottom:1px solid #39889D;
 }
 
 #topo h1 {
 	display: inline;
     float: left;
-    height: 89px;
+    height: 70px;
     left: 20px;
     margin:6px 0 0 0;
     position: relative;
