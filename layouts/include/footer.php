@@ -1,7 +1,7 @@
                     </div><!--fecha container-->
                     
                     <div id="rodape">
-                        <p > <img src="img/marca_rodape.png" alt="logo Easy" />Copyright © SGE - Easy Equipamentos Odontológicos.</p>
+                        <p > <img src="img/cloudmini.png" alt="logo    Consultório Online" />Copyright © 2016 - Consultório Online.</p>
                     </div> <!--Fecha div rodape-->
                 </div><!--fecha dropshadow-->
                 

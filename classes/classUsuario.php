@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
     include_once("classPessoa.php");
 
@@ -82,7 +82,7 @@
                 $sSql .= " ".utf8_decode($this->getId()).", ";
                 $sSql .= " '".utf8_decode($this->getLogin())."', ";
                 $sSql .= " '".utf8_decode($this->getSenha())."', ";
-                $sSql .= " '0000-00-00 00:00:00', ";
+                $sSql .= " NOW(), ";
                 $sSql .= " '".utf8_decode($this->getTipoAcesso())."',";
                 $sSql .= " '".utf8_decode($this->getCRO())."') ";
 

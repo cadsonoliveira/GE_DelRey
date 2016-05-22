@@ -1,5 +1,5 @@
-<?php
-	//Antiga página pacientes_geral.php
+﻿<?php
+    //Antiga página pacientes_geral.php
     session_start();
 
     if((!isset($_SESSION['USUARIO'])) && ($_SESSION['USUARIO']['VALIDA'] != true)){

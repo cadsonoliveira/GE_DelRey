@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 	//Antiga página usuarios_cadastro.php
     session_start();
 
@@ -83,9 +83,10 @@
 			}
 	
 			$combo = new Combo();
-				$combo->bAddItemCombo("Dentista","Dentista");
+				$combo->bAddItemCombo("Médico","Médico");
+				$combo->bAddItemCombo("Gestor","Gestor");
 				$combo->bAddItemCombo("Secretaria","Secret&aacute;ria");
-	
+				$combo->bAddItemCombo("Dentista","Dentista");				
 			if($tipoAcesso=="")
 			   $combo_status = $combo->sGetHTML('','acesso','','',$tipoAcesso,'onchange="altera_display(this.value)"','style="width:223px;"');
 			else
@@ -102,11 +103,11 @@
         <div id="dropshadow">
             <div id="breadcrumb">
                 <ul>
-                    <li><span class="breadcrumbEsquerda"></span><a>configurações</a><span class="breadcrumbDireita"></span>
+                    <li><span class="breadcrumbEsquerda"></span><a>cadastro</a><span class="breadcrumbDireita"></span>
                         <ul>
-                            <li><span class="breadcrumbEsquerda"></span><a href="usuarios.php">usuários</a><span class="breadcrumbDireita"></span>
+                            <li><span class="breadcrumbEsquerda"></span><a href="usuarios.php">profissionais</a><span class="breadcrumbDireita"></span>
                                 <ul>
-                                    <li><span class="breadcrumbEsquerda bcrumbSelect"></span><h2 class="bcrumbAtivo bcrumbSelect">cadastro usuários</h2><span class="breadcrumbDireita bcrumbSelect"></span></li>
+                                    <li><span class="breadcrumbEsquerda bcrumbSelect"></span><h2 class="bcrumbAtivo bcrumbSelect">cadastro profissionais</h2><span class="breadcrumbDireita bcrumbSelect"></span></li>
                                 </ul>
                             </li>
                         </ul>
@@ -131,11 +132,11 @@
                             </div>
                             
                             <div class="elementosFormulario2">
-                                <label>Sexo</label>
+                                <label class="itensObrigatorios">Sexo</label>
                                 <input id="masculino" name="sexo" type="radio" value="M" <?php echo $mas_chk; ?> />
-                                <label for="masculino" class="campoSexo">Masculino</label>
+                                <label for="masculino" class="campoSexo" class="itensObrigatorios">Masculino</label>
                                 <input id="feminino" name="sexo" type="radio" value="F" <?php echo $fem_chk; ?> />
-                                <label for="feminino" class="campoSexo">Feminino</label>
+                                <label for="feminino" class="campoSexo" class="itensObrigatorios">Feminino</label>
                             </div>
                             
                             <div class="elementosFormulario2">
@@ -176,7 +177,90 @@
                         </div><!--fecha formularioDividido-->
                     </fieldset>
                     
+                   
                     <fieldset class="dadosUsuario">
+                        <h3 class="tituloBox">Acesso</h3>
+                        <div class="formularioDividido">
+                            <div class="elementosFormulario2">
+                                <label for="tipo_de_acesso" class="itensObrigatorios">Tipo de Acesso</label>
+                                <?php echo $combo_status;?>
+                            </div>
+                            
+                            <div id="especialidadesUsuario" class="elementosFormulario2">
+                            	<input name='especialidades' type='hidden' value='<?php echo join(",",$especialidades);?>'>
+                                <label class="itensObrigatorios">Especialidade(s)</label>
+                                <span style="float:left; width:85%; margin-bottom:15px;">
+                                <?php
+									$pers = new Persistencia();
+									$sql = "SELECT * FROM especialidade";
+									$pers->bExecute($sql);
+									$pers->bDados();
+									while( $data = $pers->getDbArrayDados()){
+									$id = (int) $data['id_especialidade'];
+									$desc = utf8_encode($data['descricao']);
+                                ?>
+                                <span class="displayInline diminuirLargura">
+                                <input id="option<?php echo $id; ?>" name="especialidades[]" type="checkbox" value="<?php echo $id; ?>" <?php echo in_array($id,$especialidades)?"checked":""; ?>/>
+                                <label for="option<?php echo $id;?>" class="campoEspecialidade"><?php echo $desc; ?></label>
+                                </span>
+                                <?php
+									$pers->bDados();
+									} 
+                                ?>
+                                </span>
+                            </div>
+                            
+                            <div class="elementosFormulario2">
+                                <label id="label_cro" for="input_cro" class="itensObrigatorios">CRM</label>
+                                <input id="input_cro" name="cro" type="text" maxlength="20" style="width:215px;" value="<?php echo $cro; ?>" />
+                            </div>
+                            <?php echo $camposSenhas?>
+                            <p class="itensObrigatorios" style="margin:15px 0 0 160px;">*Campos em vermelho são obrigatórios</p>
+                        </div><!--fecha formularioDividido-->
+                    </fieldset>
+					
+					
+					
+					    <fieldset class="dadosUsuario">
+                        <h3 class="tituloBox">Horários para Atendimento</h3>
+                        <div class="formularioDividido">
+                            <div class="elementosFormulario2">
+                                <label for="logrdo">Horarios</label>
+                                <input id="logrdo" name="logrdo" type="text" onchange="Mascara('STRING',this,event);" value="<?php echo $usuario->getEndereco()->getLogradouro(); ?>" style="width:417px;" />
+                            </div>
+                            
+                           
+                            
+                            <div class="elementosFormulario2">
+                                <label for="cep">outra coisa</label>
+                                <input id="cep" name="cep" type="text" maxlength="5" onkeyup="tabProxCampo(this, this.value, 'cep_comp')" value="<?php echo $cep; ?>" />
+                                <input class="ultimosDigitos" name="cep_comp" type="text" maxlength="3" value="<?php echo $cep_comp; ?>" />
+                            </div>
+							
+                        </div><!--fecha formularioDividido-->          
+                    </fieldset>
+					
+					 <fieldset class="dadosUsuario">
+                        <h3 class="tituloBox">Convênios atendidos</h3>
+                        <div class="formularioDividido">
+                            <div class="elementosFormulario2">
+                                <label for="logrdo">Horarios</label>
+                                <input id="logrdo" name="logrdo" type="text" onchange="Mascara('STRING',this,event);" value="<?php echo $usuario->getEndereco()->getLogradouro(); ?>" style="width:417px;" />
+                            </div>
+                            
+                           
+                            
+                            <div class="elementosFormulario2">
+                                <label for="cep">outra coisa</label>
+                                <input id="cep" name="cep" type="text" maxlength="5" onkeyup="tabProxCampo(this, this.value, 'cep_comp')" value="<?php echo $cep; ?>" />
+                                <input class="ultimosDigitos" name="cep_comp" type="text" maxlength="3" value="<?php echo $cep_comp; ?>" />
+                            </div>
+							
+                        </div><!--fecha formularioDividido-->          
+                    </fieldset>
+					
+					
+				    <fieldset class="dadosUsuario">
                         <h3 class="tituloBox">Endereço</h3>
                         <div class="formularioDividido">
                             <div class="elementosFormulario2">
@@ -220,47 +304,8 @@
                             </div>
                         </div><!--fecha formularioDividido-->          
                     </fieldset>
-                    
-                    <fieldset class="dadosUsuario">
-                        <h3 class="tituloBox">Acesso</h3>
-                        <div class="formularioDividido">
-                            <div class="elementosFormulario2">
-                                <label for="tipo_de_acesso" class="itensObrigatorios">Tipo de Acesso</label>
-                                <?php echo $combo_status;?>
-                            </div>
-                            
-                            <div id="especialidadesUsuario" class="elementosFormulario2">
-                            	<input name='especialidades' type='hidden' value='<?php echo join(",",$especialidades);?>'>
-                                <label class="itensObrigatorios">Especialidade(s)</label>
-                                <span style="float:left; width:85%; margin-bottom:15px;">
-                                <?php
-									$pers = new Persistencia();
-									$sql = "SELECT * FROM especialidade";
-									$pers->bExecute($sql);
-									$pers->bDados();
-									while( $data = $pers->getDbArrayDados()){
-									$id = (int) $data['id_especialidade'];
-									$desc = utf8_encode($data['descricao']);
-                                ?>
-                                <span class="displayInline diminuirLargura">
-                                <input id="option<?php echo $id; ?>" name="especialidades[]" type="checkbox" value="<?php echo $id; ?>" <?php echo in_array($id,$especialidades)?"checked":""; ?>/>
-                                <label for="option<?php echo $id;?>" class="campoEspecialidade"><?php echo $desc; ?></label>
-                                </span>
-                                <?php
-									$pers->bDados();
-									} 
-                                ?>
-                                </span>
-                            </div>
-                            
-                            <div class="elementosFormulario2">
-                                <label id="label_cro" for="input_cro" class="itensObrigatorios">CRO</label>
-                                <input id="input_cro" name="cro" type="text" maxlength="20" style="width:215px;" value="<?php echo $cro; ?>" />
-                            </div>
-                            <?php echo $camposSenhas?>
-                            <p class="itensObrigatorios" style="margin:15px 0 0 160px;">*Campos em vermelho são obrigatórios</p>
-                        </div><!--fecha formularioDividido-->
-                    </fieldset>
+ 
+					
                     
                     <p id="botoesFormulario">
                         <button id="botaoNegativo" type="button" onclick="location.href='usuarios.php'">Cancelar</button>
@@ -324,8 +369,6 @@
                if (valida_tel(document.cd_field.tel_com))
                if (valida_email2(document.cd_field.mail))
                if (valida_numero(document.cd_field.numro, "Preencha o campo número corretamente"))
-               if (valida_cep(document.cd_field.cep))
-               if (valida_cep(document.cd_field.cep_comp))
                if (valida_cro())
                if (valida_login())
                if (valida_senha())
@@ -336,7 +379,17 @@
                 if(( $('acesso').get('value') == "Dentista") && ($('input_cro').get('value').trim() == "" ) ){
                     alert('Preencha o campo CRO');
                     $('input_cro').focus();
-                } else {
+                } 
+				else {
+                    return true;
+                }
+            }
+			
+			function valida_crm(){
+                if(( $('acesso').get('value') == "Médico") && ($('input_cro').get('value').trim() == "" ) ){
+                    alert('Preencha o campo CRM');
+                    $('input_cro').focus();
+                }  else {
                     return true;
                 }
             }
@@ -384,7 +437,8 @@
             }
         
             function altera_display(tipo_acesso){
-                if(tipo_acesso != "Dentista"){
+				
+                if (tipo_acesso != "Médico"){
                     $('label_cro').set('style', "display:none;");
                     $('input_cro').set('style', "display:none;");
 					$('especialidadesUsuario').set('style', "display:none;");
@@ -396,7 +450,7 @@
                 }
             }
 			
-				if($('acesso').value != "Dentista"){
+				if($('acesso').value != "Médico"){
                     $('label_cro').set('style', "display:none;");
                     $('input_cro').set('style', "display:none;");
 					$('especialidadesUsuario').set('style', "display:none;");

@@ -69,11 +69,30 @@
                             <label for="celular">Celular</label>
                             <input id="celular" name="tel_cel" type="text" class="inputMenor" maxlength="16" onkeypress="return Mascara('CEL',this,event);" value="<?php echo $contato->getTelefoneCelular(); ?>"/>                        
                         </div>
+						
                         <label for="email">E-mail</label>
                         <input id="email" name="email" type="text" style="width:390px;" value="<?php echo $contato->getEmail(); ?>"/>
-                        <p style="margin:10px 0 0 160px; color:#666;">Procurar o telefone do Plano de Saúde Cadastrado ajudará você e a todos da equipe em agendamentos e pesquisas futuras.</p>
-                        <p class="itensObrigatorios" style="margin:2px 0 0 160px;">*Campos em vermelho são obrigatórios</p>
+						   	 
+                        <div class="elementosFormulario2">
+                            <label for="cnpj">CNPJ</label>
+                            <input id="cnpj" name="tel_cel" type="text" class="inputMenor" maxlength="16" onkeypress="return Mascara('CPF',this,event)" value="<?php echo $contato->getTelefoneCelular(); ?>"/>                        
                         </div>
+						
+						<div class="elementosFormulario2">
+                            <label for="contato">Contato</label>
+                            <input id="contato" name="tel_cel" type="text" class="inputMenor" maxlength="16" onblur="Mascara('STRING',this,event);"  value="<?php echo $contato->getTelefoneCelular(); ?>"/>                        
+                        </div>
+						 
+						<div class="elementosFormulario2">                                    
+                        <label for="observacao_documento">Observações</label>
+                        <textarea id="observacao_documento" name="sessao" cols="50" rows="4"></textarea>
+                        </div>
+						
+                        <p style="margin:10px 0 0 160px; color:#666;">Procurar o telefone do Plano de Saúde Cadastrado ajudará você e a todos da equipe em agendamentos e pesquisas futuras.</p>
+                        <p class="itensObrigatorios" style="margin:2px 0 0 160px;">*Preencha os campos vermelhos obrigatoriamente</p>
+                        </div>
+						
+					
                 </fieldset>
                 
                 
