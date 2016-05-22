@@ -2,15 +2,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 
     <head>
-    	<!--                            SGE                                -->
-        <!--            Coding and Creation by Invent Vision               -->
+    	<!--            Consultório Online                                -->
+        <!--            Coding and Creation                                -->
         <!--   XHTML and Interface Created By 2de1  www.doisdeum.com.br    -->
         <!--           Build 2.000.000 |  3 Sept 2012 - 22:10 GMT-3         -->
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>SGE - Sistema de Gerenciamento de Especialidade</title>
+        <title>Consultório Online</title>
         <meta http-equiv="Content-Language" content="pt-br" />
-        <meta name="description" content="Sistema de Gerenciamento de Especialidade" />
-        <meta name="keywords" content="Odontologia, Sistema, Gerenciamento" />
+        <meta name="description" content="Consultório Online" />
+        <meta name="keywords" content="Clinica, Consultório, Gerenciamento, especialidades, clinica geral, ortopedia, dermatologia, otorrino" />
         <meta name="robots" content="index,follow" />
         <meta name="author" content="dois de um - http://www.doisdeum.com.br" />
         <link rel="shortcut icon" href="favicon.ico" />
